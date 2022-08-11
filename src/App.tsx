@@ -9,12 +9,12 @@ import {
   UIManager,
   ScrollView,
 } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import {RectButton} from 'react-native-gesture-handler';
 import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {
   Carousel,
   CustomLayoutAnimationScreen,
@@ -30,16 +30,16 @@ import {
 import AnimatedStyleUpdateExample from './AnimatedStyleUpdateExample';
 import AnimatedTabBarExample from './AnimatedTabBarExample';
 import ChatHeadsExample from './ChatHeadsExample';
-import { PagerExample } from './CustomHandler';
+import {PagerExample} from './CustomHandler';
 import DragAndSnapExample from './DragAndSnapExample';
 import ExtrapolationExample from './ExtrapolationExample';
-import { KeyframeAnimation } from './LayoutReanimation/KeyframeAnimation';
+import {KeyframeAnimation} from './LayoutReanimation/KeyframeAnimation';
 import FrameCallbackExample from './FrameCallbackExample';
 import LightboxExample from './LightboxExample';
 import LiquidSwipe from './LiquidSwipe';
 import MeasureExample from './MeasureExample';
-import { OlympicAnimation } from './LayoutReanimation/OlympicAnimation';
-import { ReactionsCounterExample } from './ReactionsCounterExample';
+import {OlympicAnimation} from './LayoutReanimation/OlympicAnimation';
+import {ReactionsCounterExample} from './ReactionsCounterExample';
 import ScrollEventExample from './ScrollEventExample';
 import ScrollExample from './AnimatedScrollExample';
 import ScrollToExample from './ScrollToExample';
@@ -47,7 +47,7 @@ import ScrollableViewExample from './ScrollableViewExample';
 import SwipeableListExample from './SwipeableListExample';
 import WobbleExample from './WobbleExample';
 import AnimatedListExample from './LayoutReanimation/AnimatedList';
-import { WaterfallGridExample } from './LayoutReanimation/WaterfallGridExample';
+import {WaterfallGridExample} from './LayoutReanimation/WaterfallGridExample';
 import AnimatedSensorExample from './AnimatedSensorExample';
 import AnimatedSharedStyleExample from './AnimatedSharedStyleExample';
 import AnimatedKeyboardExample from './AnimatedKeyboardExample';
@@ -60,7 +60,7 @@ if (Platform.OS === 'android') {
   }
 }
 
-type Screens = Record<string, { screen: React.ComponentType; title?: string }>;
+type Screens = Record<string, {screen: React.ComponentType; title?: string}>;
 
 const SCREENS: Screens = {
   DefaultAnimations: {
@@ -197,26 +197,26 @@ const SCREENS: Screens = {
   },
 };
 
-type RootStackParams = { Home: undefined } & { [key: string]: undefined };
+type RootStackParams = {Home: undefined} & {[key: string]: undefined};
 type MainScreenProps = {
   navigation: StackNavigationProp<RootStackParams, 'Home'>;
 };
 
-function MainScreen({ navigation }: MainScreenProps) {
-  const data = Object.keys(SCREENS).map((key) => ({ key }));
+function MainScreen({navigation}: MainScreenProps) {
+  const data = Object.keys(SCREENS).map(key => ({key}));
   return (
     <FlatList
       style={styles.list}
       data={data}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={(props) => (
+      renderItem={props => (
         <MainScreenItem
           {...props}
           screens={SCREENS}
-          onPressItem={({ key }) => navigation.navigate(key)}
+          onPressItem={({key}) => navigation.navigate(key)}
         />
       )}
-      renderScrollComponent={(props) => <ScrollView {...props} />}
+      renderScrollComponent={props => <ScrollView {...props} />}
     />
   );
 }
@@ -225,10 +225,10 @@ export function ItemSeparator(): React.ReactElement {
   return <View style={styles.separator} />;
 }
 
-type Item = { key: string };
+type Item = {key: string};
 type MainScreenItemProps = {
   item: Item;
-  onPressItem: ({ key }: Item) => void;
+  onPressItem: ({key}: Item) => void;
   screens: Screens;
 };
 export function MainScreenItem({
@@ -236,10 +236,10 @@ export function MainScreenItem({
   onPressItem,
   screens,
 }: MainScreenItemProps): React.ReactElement {
-  const { key } = item;
+  const {key} = item;
   return (
     <RectButton style={styles.button} onPress={() => onPressItem(item)}>
-      <Text style={styles.buttonText}>{screens[key].title || key}</Text>
+      <Text style={[styles.buttonText,{color:'#000'}]}>{screens[key].title || key}</Text>
     </RectButton>
   );
 }
@@ -250,15 +250,15 @@ const Reanimated2 = () => (
   <Stack.Navigator detachInactiveScreens={false}>
     <Stack.Screen
       name="Home"
-      options={{ title: '🎬 Reanimated 2.x Examples' }}
-      children={(props) => <MainScreen {...props} />}
+      options={{title: '🎬 Reanimated 2.x Examples'}}
+      children={props => <MainScreen {...props} />}
     />
-    {Object.keys(SCREENS).map((name) => (
+    {Object.keys(SCREENS).map(name => (
       <Stack.Screen
         key={name}
         name={name}
         getComponent={() => SCREENS[name].screen}
-        options={{ title: SCREENS[name].title || name }}
+        options={{title: SCREENS[name].title || name}}
       />
     ))}
   </Stack.Navigator>
